@@ -23,4 +23,28 @@ class AccueilController extends AbstractController
             'culture' => 'culture',
         ]);
     }
+
+    #[Route('Recette', name: 'recette')]
+    public function recette(): Response
+    {
+        return $this->render('recette.html.twig', [
+            'recette' => 'recette',
+        ]);
+    }
+
+    #[Route('Contact', name: 'contact')]
+    public function contact(): Response
+    {
+        return $this->render('contact.html.twig', [
+            'contact' => 'contact',
+        ]);
+    }
+
+    #[Route('Commentaire', name: 'commentaire')]
+    public function commentaire(): Response
+    {
+        return $this->render('commentaire.html.twig', [
+            'commentaire' => 'commentaire',
+        ]);
+    } 
 }
