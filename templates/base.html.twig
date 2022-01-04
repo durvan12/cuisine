@@ -23,11 +23,8 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
             <div class="container-fluid">
-              <div>
-                <img src="{{ asset('img/logo.jpg') }} ">
-              </div>
               <a class="navbar-brand" href="#">Accueil</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -35,16 +32,16 @@
               <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Recette</a>
+                    <a class="nav-link active" aria-current="page" href="{{ path('recette_index') }}">Recette</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Category</a>
+                    <a class="nav-link" href="{{ path('category_index') }}">Category</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Culture</a>
+                    <a class="nav-link" href="{{ path('culture_index') }}">Culture</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="{{ path('contact_index') }}">Contact</a>
                   </li>
                 </ul>
                 <form class="d-flex">
@@ -60,38 +57,33 @@
         {% block body %}{% endblock %}
     </main>
 
-    <footer>
-      <footer class="container-fluid bg-light">
-        <div class="row text-center p-5">
-            <div class="col-4">
-                <h5>QUELQUES LIENS</h5>
-                <div class="dropdown-divider"></div>
-                <p><a href="{{ path('accueil') }}">Accueil</a></p>
-                <p><a href="{{ path('recette_index') }}">Recettes</a></p>
-                <p><a href="{{ path('culture_index') }}">Cultures</a></p>
-            </div>
-            <div class="col-4 my-auto">
-                <img src="{{ asset('img/logo.png') }}" alt="Cuisine Foufa" class="w-100">
-            </div>
-            <div class="col-4">
-                <h5>Contact</h5>
-                <div class="dropdown-divider"></div>
-                <p>{{ contact_address }}</p>
-                <p>{{ contact_zip }} {{ contact_city }}</p>
-                <p>{{ contact_phone }}</p>
-                <p>{{ contact_email }}</p>
-            </div>
-        </div>
-        <div class="row" id="copyright">
-            <div class="col-12 text-center">
-                <p>{{ copyright }}</p>
-            </div>
-        </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="{{ asset('js/script.js') }}"></script>
-        
+    <footer class="footer container-fluid ">
+      <div class="row text-center p-5">
+          <div class="col-12 col-md-6 col-lg-4 order-sm-1 order-md-1 order-lg-1 p-5">
+              <h5>QUELQUES LIENS</h5>
+              <div class="dropdown-divider" style="border-color:white;"></div>
+              <p><a href="{{ path('accueil') }}">Accueil</a></p>
+              <p><a href="{{ path('recette_index') }}">Recettes</a></p>
+              <p><a href="{{ path('culture_index') }}">Cultures</a></p>
+              <p><a href="{{ path('contact_index') }}">Contact</a></p>
+          </div>
+          <div class="col-12 col-md-6 offset-md-3 col-lg-4 offset-lg-0 my-auto order-sm-2 order-md-3 order-lg-2 p-5">
+              <img src="{{ asset('img/logo.png') }}" alt="logo" class="w-75 rounded">
+          </div>
+          <div class="col-12 col-md-6 col-lg-4 order-sm-3 order-md-2 order-lg-3 p-5">
+              <h5>COORDONNÉES</h5>
+              <div class="dropdown-divider" style="border-color:white;"></div>
+              <p>{{ contact_address }}</p>
+              <p>{{ contact_zip }} {{ contact_city }}</p>
+              <p>{{ contact_phone }}</p>
+              <p>{{ contact_email }}</p>
+          </div>
+      </div>
+      <div class="row" id="copyright">
+          <div class="col-12 text-center">
+              <p>{{ copyright }}</p>
+          </div>
+      </div>
     </footer>
 </body>
 
