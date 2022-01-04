@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Commentaire;
-use App\Form\Commentaire1Type;
+use App\Form\CommentaireType;
 use App\Repository\CommentaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,7 +26,7 @@ class CommentaireController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $commentaire = new Commentaire();
-        $form = $this->createForm(Commentaire1Type::class, $commentaire);
+        $form = $this->createForm(CommentaireType::class, $commentaire);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -53,7 +53,7 @@ class CommentaireController extends AbstractController
     #[Route('/{id}/edit', name: 'commentaire_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Commentaire $commentaire, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(Commentaire1Type::class, $commentaire);
+        $form = $this->createForm(CommentaireType::class, $commentaire);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

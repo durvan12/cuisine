@@ -1,11 +1,11 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
     globals:
-        contact_address: '12 rue du berger'
-        contact_city: 'maison alfort'
+        contact_address: '20 rue marcelin berthelot'
+        contact_city: 'Alfortville'
         contact_email: 'abbassi.hassen23@gmail.com'
-        contact_phone: '01.23.45.67.89'
-        contact_zip: '12345'
+        contact_phone: '06.73.06.29.04'
+        contact_zip: '94140'
         copyright: 'Copyright © 2021 - Abbassi Hassen'
     form_themes: ['bootstrap_5_layout.html.twig']
 
