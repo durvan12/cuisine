@@ -24,7 +24,6 @@
                 <td>{{ culture.img }}</td>
                 <td>
                     <a href="{{ path('culture_show', {'id': culture.id}) }}">show</a>
-                    <a href="{{ path('culture_edit', {'id': culture.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +34,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('culture_new') }}">Create new</a>
 {% endblock %}
