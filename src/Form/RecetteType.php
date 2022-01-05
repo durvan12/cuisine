@@ -3,13 +3,15 @@
 namespace App\Form;
 
 use App\Entity\Recette;
+use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Validator\Constraints\Image;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class RecetteType extends AbstractType
 {
@@ -27,14 +29,14 @@ class RecetteType extends AbstractType
                     'placeholder' => 'Ex.: ingredient et recette'
                 ]
             ])
-            ->add('author', TextType::class, [
-                'label' => 'author',
-                'attr' => [
-                    'placeholder' => 'Ex.: admin'
-                ]
+            ->add('author', HiddenType::class, [
+                'required' => false
             ])
-            ->add('categorie')
-            
+            ->add('categorie', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'expanded' => true
+            ])
             ->add('img', FileType::class, [
                 'required' => false,
                 'label' => 'Image principale',
@@ -53,7 +55,6 @@ class RecetteType extends AbstractType
                     ])
                 ]
             ])
-            ->add('valider', SubmitType::class)
         ;
     }
 
