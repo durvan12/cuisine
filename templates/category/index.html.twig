@@ -2,10 +2,14 @@
 
 {% block title %}Category index{% endblock %}
 
-{% block body %}
-    <h1>Category index</h1>
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/category.css') }}">
+{% endblock %}
 
-    <table class="table">
+{% block body %}
+    <h1>Category</h1>
+
+    <table id="table">
         <thead>
             <tr>
                 <th>Id</th>

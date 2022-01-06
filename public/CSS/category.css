@@ -1,0 +1,11 @@
+#table flexbox-container {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-between;
+  }
+
+body {
+    background-color: white;
+}
