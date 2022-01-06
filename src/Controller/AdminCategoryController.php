@@ -30,6 +30,14 @@ class AdminCategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // gérer l'image
+            /*
+                - renommer
+                - upload
+                - $category->setImg()
+            */
+
             $entityManager->persist($category);
             $entityManager->flush();
 

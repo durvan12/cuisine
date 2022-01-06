@@ -51,6 +51,11 @@
           </ul>
         </div>
       </div>
+      {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+          <a href="{{ path('app_logout') }}"><button class="btn btn-outline-success ml-5 my-2 my-sm-0" type="button">Se déconnecter</button></a>
+        {% else %}
+          <a href="{{ asset('login') }}"><button class="btn btn-outline-success ml-5 my-2 my-sm-0" type="button">S'inscrire / Se Connecter</button></a>  
+        {% endif %}
     </nav>
   </header>
 
