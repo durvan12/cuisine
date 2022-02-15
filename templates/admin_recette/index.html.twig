@@ -2,6 +2,12 @@
 
 {% block title %}Recette index{% endblock %}
 
+{% block stylesheets %}
+
+<link rel="stylesheet" type="text/css" href="{{ asset('css/CSSAdmin/adminimg.css') }}">
+
+{% endblock %}
+
 {% block body %}
     <h1>Recette</h1>
 
@@ -21,7 +27,7 @@
                 <td>{{ recette.id }}</td>
                 <td>{{ recette.title }}</td>
                 <td>{{ recette.content }}</td>
-                <td><img src="{{ asset('img/recettes/' ~ recette.img) }}" alt=""></td>
+                <td><img src="{{ asset('img/recettes/' ~ recette.img) }}" class="img1" alt=""></td>
                 <td>
                     <a href="{{ path('admin_recette_show', {'id': recette.id}) }}">Voir</a>
                     <a href="{{ path('admin_recette_edit', {'id': recette.id}) }}">Modifier</a>

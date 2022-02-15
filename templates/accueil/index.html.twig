@@ -7,5 +7,22 @@
 <header id="images" class="text-center"></header>
 
 
+<main class="mb-3 mt-4">
+    {% for recette in mekla %}
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      {# boucler pour en afficher le nombre voulu (nécessite une méthode pour le faire) #}
+      <div class="col">
+        <div class="card">
+          <td><img src="{{ asset('img/recettes/' ~ recette.img) }}" alt=""></td>
+          <div class="card-body">
+            <h5 class="card-title">{{ recette.title }}</h5>
+            <p class="card-text">{{ recette.content }}</p>
+            <a href="#" class="card-link">Recette Complete</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </main>
 
 {% endblock %}
