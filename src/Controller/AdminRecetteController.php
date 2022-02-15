@@ -61,31 +61,51 @@ class AdminRecetteController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'admin_recette_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Recette $recette, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, RecetteRepository $recetteRepository, int $id, ManagerRegistry $managerRegistry): Response
     {
+        $recette = $recetteRepository->find($id);
         $form = $this->createForm(RecetteType::class, $recette);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('admin_recette_index', [], Response::HTTP_SEE_OTHER);
+            $infoImg = $form['img']->getData();
+            $nomOldImg = $recette->getImg(); // récupère le nom de l'ancienne img1
+            if ($infoImg !== null) { // vérifie si il y a une img1 dans le formulaire
+                $cheminOldImg = $this->getParameter('recettes_pictures_directory') . '/' .$nomOldImg;
+                if (file_exists($cheminOldImg)) {
+                    unlink($cheminOldImg); // supprime l'ancienne img1
+                }
+                $nomOldImg = time() . '-1.' . $infoImg->guessExtension(); // reconstitue le nom de la nouvelle img1
+                $recette->setImg($nomOldImg); // définit le nom de l'img1 de l'objet Maison
+                $infoImg->move($this->getParameter('recettes_pictures_directory'), $nomOldImg); // upload
+            } else {
+                $recette->setImg($nomOldImg); // re-définit le nom de l'img1 à mettre en bdd
+            }
+            $manager = $managerRegistry->getManager();
+            $manager->persist($recette);
+            $manager->flush();
+            $this->addFlash('success', 'La recette a bien été modifiée');
+            return $this->redirectToRoute('admin_recette_index');
         }
-
-        return $this->renderForm('admin_recette/edit.html.twig', [
+        return $this->render('admin_recette/edit.html.twig', [
             'recette' => $recette,
-            'form' => $form,
+            'form' => $form->createView()
         ]);
     }
 
     #[Route('/{id}', name: 'admin_recette_delete', methods: ['POST'])]
-    public function delete(Request $request, Recette $recette, EntityManagerInterface $entityManager): Response
+    public function delete(RecetteRepository $recetteRepository, int $id, ManagerRegistry $managerRegistry): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$recette->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($recette);
-            $entityManager->flush();
+        $recette = $recetteRepository->find($id);
+        // throw new \Exception('TODO: gérer la suppression des images du dossier img');
+        $img = $this->getParameter('recettes_pictures_directory') . '/' . $recette->getImg();
+        if ($recette->getImg() && file_exists($img)) {
+            unlink($img);
         }
-
-        return $this->redirectToRoute('admin_recette_index', [], Response::HTTP_SEE_OTHER);
+        $manager = $managerRegistry->getManager();
+        $manager->remove($recette);
+        $manager->flush();
+        $this->addFlash('success', 'Le recette a bien était supprimée');
+        return $this->redirectToRoute('admin_recette_index');
     }
 }

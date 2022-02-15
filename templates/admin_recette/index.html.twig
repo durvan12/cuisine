@@ -3,15 +3,15 @@
 {% block title %}Recette index{% endblock %}
 
 {% block body %}
-    <h1>Recette index</h1>
+    <h1>Recette</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Title</th>
-                <th>Content</th>
-                <th>Img</th>
+                <th>Titre</th>
+                <th>Contenu</th>
+                <th>Images</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -21,19 +21,19 @@
                 <td>{{ recette.id }}</td>
                 <td>{{ recette.title }}</td>
                 <td>{{ recette.content }}</td>
-                <td>{{ recette.img }}</td>
+                <td><img src="{{ asset('img/recettes/' ~ recette.img) }}" alt=""></td>
                 <td>
-                    <a href="{{ path('admin_recette_show', {'id': recette.id}) }}">show</a>
-                    <a href="{{ path('admin_recette_edit', {'id': recette.id}) }}">edit</a>
+                    <a href="{{ path('admin_recette_show', {'id': recette.id}) }}">Voir</a>
+                    <a href="{{ path('admin_recette_edit', {'id': recette.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Ce n'est pas ici</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('admin_recette_new') }}">Create new</a>
+    <a href="{{ path('admin_recette_new') }}">Nouvelle Recette</a>
 {% endblock %}

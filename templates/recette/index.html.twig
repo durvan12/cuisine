@@ -21,7 +21,7 @@
                 <td>{{ recette.id }}</td>
                 <td>{{ recette.title }}</td>
                 <td>{{ recette.content }}</td>
-                <td>{{ recette.img }}</td>
+                <td><img src="{{ asset('img/recettes/' ~ recette.img) }}" alt=""></td>
                 <td>
                     <a href="{{ path('recette_show', {'id': recette.id}) }}">show</a>
                 </td>
